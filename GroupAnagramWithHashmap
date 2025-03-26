@@ -1,0 +1,21 @@
+public class Group_anagramusingHashmap {
+	public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null || strs.length == 0) return new ArrayList<>();
+        
+        // HashMap to store sorted string as key and list of anagrams as value
+        Map<String, List<String>> map = new HashMap<>();
+        
+        for (String s : strs) {
+            // Convert the string to char array, sort it, and convert back to string
+            char[] charArray = s.toCharArray();
+            Arrays.sort(charArray);
+            String sortedKey = new String(charArray);
+            
+            // Add to the corresponding anagram group in HashMap
+            map.putIfAbsent(sortedKey, new ArrayList<>());
+            map.get(sortedKey).add(s);
+        }
+        
+        return new ArrayList<>(map.values()); // Convert values of map to List of Lists
+    }
+}
